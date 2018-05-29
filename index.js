@@ -1,9 +1,17 @@
-const express = require("express");
+const express = require('express');
+const mongoose = require('mongoose');
+const keys = require('./config/keys');
+require('./models/User');
+require('./services/passport');
+
+mongoose.connect(keys.mongoURI);
+
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send({ there: 'homie' });
-});
+require('./routes/authRoutes')(app);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
+
+//client id
+//client secret;
